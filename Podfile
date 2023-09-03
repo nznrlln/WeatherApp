@@ -7,5 +7,8 @@ target 'WeatherApp' do
 
   # Pods for WeatherApp
   pod 'SnapKit', '~> 5.6.0'
+  pod 'Kingfisher', '~> 7.9'
+  pod 'RxSwift', '~> 6.5'
+  pod 'RxCocoa', '~> 6.5'
 
 end
