@@ -16,11 +16,7 @@ import RxCocoa
 class CitiesScreenViewController: UIViewController, CitiesScreenViewInput {
 
     // MARK: - Properties
-    var viewModel: ICitiesScreenViewModel? {
-        didSet {
-            configureRX()
-        }
-    }
+    private let viewModel: ICitiesScreenViewModel
 
     private let disposeBag = DisposeBag()
 
@@ -94,6 +90,18 @@ class CitiesScreenViewController: UIViewController, CitiesScreenViewInput {
         return collectionView
     }()
 
+    // MARK: - Init
+    init(viewModel: ICitiesScreenViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+
+        configureRX()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
@@ -101,7 +109,7 @@ class CitiesScreenViewController: UIViewController, CitiesScreenViewInput {
         // Do any additional setup after loading the view.
 
         viewInitialSettings()
-        viewModel?.viewDidLoad()
+        viewModel.viewDidLoad()
     }
 
     // MARK: - Methods + layout
@@ -137,7 +145,7 @@ class CitiesScreenViewController: UIViewController, CitiesScreenViewInput {
     }
 
     private func bindCollectionView() {
-        viewModel?.citiesList.bind(
+        viewModel.citiesList.bind(
             to: citiesCollectionView.rx.items(
                 cellIdentifier: CityCollectionViewCell.identifier,
                 cellType: CityCollectionViewCell.self)) { index, model, cell in
@@ -153,20 +161,28 @@ class CitiesScreenViewController: UIViewController, CitiesScreenViewInput {
             .itemSelected
             .subscribe { [weak self] event in
                 if let indexPath = event.element {
-                    self?.viewModel?.didSelectItem(index: indexPath.item)
+                    self?.viewModel.didSelectItem(index: indexPath.item)
                 }
             }
     }
 
     private func bindAlert() {
-        viewModel?.alert.subscribe { event in
+        viewModel.alert.subscribe { [weak self] event in
             guard let model = event.element else { return }
             let alert = AlertBuilder.buildAlertController(for: model)
+            DispatchQueue.main.async {
+                self?.present(alert, animated: true)
+            }
         }.disposed(by: disposeBag)
     }
 
     @objc private func addCityButtonTap() {
-            viewModel?.addCityButtonTap()
+        let alert = AlertBuilder.buildAddCityAlert { [weak self] name in
+            self?.viewModel.addCityButtonTap(name: name)
+        }
+
+        self.present(alert, animated: true)
+
     }
 
 }

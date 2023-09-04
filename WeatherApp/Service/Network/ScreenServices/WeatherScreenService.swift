@@ -8,8 +8,6 @@
 import Foundation
 
 protocol IWeatherScreenService {
-//    func getAds() async -> Result<AdsModel, NetworkError>
-//    func getWeather(cityUID: String, lon: String,lat: String) async -> Result<CityWeatherModel, NetworkError>
     func getWeather(lon: String,lat: String) async -> Result<CityWeatherModel, NetworkError>
 
 }
@@ -24,24 +22,6 @@ final class WeatherScreenService: IWeatherScreenService {
     }
 
     // MARK: - IWeatherScreenService
-//    func getAds() async -> Result<AdsModel, NetworkError> {
-//        await networkClient.getData(from: AdsRequest())
-//    }
-
-//    func getWeather(at lon: String,at lat: String) async -> Result<CityWeatherModel, NetworkError> {
-//        var cityWeather = CityWeatherModel()
-//
-//        let current = await getCurrentWeather(lon: lon, lat: lat)
-//        let forecast24h = await getForecast24hWeather(lon: lon, lat: lat)
-//        let forecast16d = await getForecast16dWeather(lon: lon, lat: lat)
-//
-//        cityWeather.currentWeather = try? current.get()
-//        cityWeather.forecast24h = try? forecast24h.get()
-//        cityWeather.forecast16d = try? forecast16d.get()
-//
-//        return cityWeather
-//    }
-
     func getWeather(lon: String,lat: String) async -> Result<CityWeatherModel, NetworkError> {
         var cityWeather = CityWeatherModel()
 

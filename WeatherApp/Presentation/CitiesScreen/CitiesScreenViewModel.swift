@@ -14,19 +14,13 @@ protocol ICitiesScreenViewModel {
     var alert: PublishRelay<AlertModel> { get }
 
     func viewDidLoad()
-    func addCityButtonTap()
+    func addCityButtonTap(name: String)
     func didSelectItem(index: Int)
 }
 
 final class CitiesScreenViewModel: ICitiesScreenViewModel {
 
     // MARK: - Properties
-//    @MainActor weak var view: CitiesScreenViewInput? {
-//        didSet {
-//            setupView()
-//        }
-//    }
-
     let userDefaults = UserDefaultsService.shared
 
     weak var coordinator: AppCoodinator?
@@ -48,18 +42,8 @@ final class CitiesScreenViewModel: ICitiesScreenViewModel {
         getCitiesList()
     }
 
-    func addCityButtonTap() {
-        addCity("Kazan")
-//        let action = AlertActionModel(
-//            title: "Добавить",
-//            style: .default) { action in
-//                <#code#>
-//            } textFieldHandler: { <#UIAlertAction#> in
-//                <#code#>
-//            }
-
-
-
+    func addCityButtonTap(name: String) {
+        addCity(name)
     }
 
     func didSelectItem(index: Int) {
@@ -85,9 +69,14 @@ final class CitiesScreenViewModel: ICitiesScreenViewModel {
             case .success(let city):
                 userDefaults.cities.insert(city)
             case .failure(let error):
-                debugPrint(error)
-//                let errorAlert = AlertModel(type: <#T##AlertType#>, title: "Ошибка", message: error, prefferedStyle: .alert)
-//                alert.accept()
+                let alertAction = AlertActionModel(title: "Close", style: .cancel)
+                let errorAlert = AlertModel(
+                    title: "Error",
+                    message: error.message,
+                    prefferedStyle: .alert,
+                    actionModels: [alertAction]
+                )
+                alert.accept(errorAlert)
             }
 
             getCitiesList()

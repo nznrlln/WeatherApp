@@ -134,23 +134,6 @@ final class WeatherScreenViewController: UIViewController, WeatherScreenViewInpu
                 )
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
-//                let itemsHeight: CGFloat = CGFloat(sectionType.numberOfItems * 150)
-//                let spacingHeight: CGFloat = CGFloat((sectionType.numberOfItems - 1) * 8)
-//                let groupHeight: CGFloat = itemsHeight + spacingHeight + 32
-//                let groupSize = NSCollectionLayoutSize(
-//                    widthDimension: .fractionalWidth(1.0),
-//                    heightDimension: .absolute(groupHeight)
-//                )
-//                let group = NSCollectionLayoutGroup.vertical(
-//                    layoutSize: groupSize,
-//                    subitem: item,
-//                    count: sectionType.numberOfItems
-//                )
-//                group.interItemSpacing = .fixed(UIConstansts.spacing)
-
-//                let itemsHeight: CGFloat = CGFloat(sectionType.numberOfItems * 150)
-//                let spacingHeight: CGFloat = CGFloat((sectionType.numberOfItems - 1) * 8)
-//                let groupHeight: CGFloat = itemsHeight + spacingHeight + 32
                 let groupSize = NSCollectionLayoutSize(
                     widthDimension: .fractionalWidth(1.0),
                     heightDimension: .absolute(UIConstansts.dateCellHeight)
@@ -267,6 +250,7 @@ final class WeatherScreenViewController: UIViewController, WeatherScreenViewInpu
 
     private func configureRX() {
         bindData()
+        bindAlert()
     }
 
     private func bindData() {
@@ -277,7 +261,16 @@ final class WeatherScreenViewController: UIViewController, WeatherScreenViewInpu
         viewModel.currentCityName.subscribe{ [weak self] event in
             self?.cityName = event.element
         }.disposed(by: disposeBag)
+    }
 
+    private func bindAlert() {
+        viewModel.alert.subscribe { [weak self] event in
+            guard let model = event.element else { return }
+            let alert = AlertBuilder.buildAlertController(for: model)
+            DispatchQueue.main.async {
+                self?.present(alert, animated: true)
+            }
+        }.disposed(by: disposeBag)
     }
 
     @objc private func citiesButtonTap() {
@@ -285,7 +278,7 @@ final class WeatherScreenViewController: UIViewController, WeatherScreenViewInpu
     }
 
     @objc private func refreshButtonTap() {
-        //    presenter?.reloadData()
+            viewModel.refreshButtonTap()
     }
 
 

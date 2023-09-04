@@ -12,22 +12,16 @@ import RxRelay
 protocol IWeatherScreenViewModel {
     var currentCityName: PublishRelay<String> { get }
     var cityWeather: PublishRelay<CityWeatherModel> { get }
-    
+    var alert: PublishRelay<AlertModel> { get }
+
     func viewDidLoad()
     func viewWillAppear()
     func citiesButtonTap()
+    func refreshButtonTap()
 }
 
 final class WeatherScreenViewModel: IWeatherScreenViewModel {
     // MARK: - Properties
-//    @MainActor weak var view: WeatherScreenViewInput? {
-//        didSet {
-//            setupView()
-//        }
-//    }
-
-    let lock = NSLock()
-
     let userDefaults = UserDefaultsService.shared
 
     weak var coordinator: AppCoodinator?
@@ -35,9 +29,11 @@ final class WeatherScreenViewModel: IWeatherScreenViewModel {
     private var currentCity: CityModel? {
         userDefaults.currentCity
     }
-//    let currentCity = PublishRelay<CityModel>()
     let currentCityName = PublishRelay<String>()
     let cityWeather = PublishRelay<CityWeatherModel>()
+
+    let alert = PublishRelay<AlertModel>()
+
 
     // MARK: - Dependencies
     private let service: IWeatherScreenService
@@ -49,6 +45,10 @@ final class WeatherScreenViewModel: IWeatherScreenViewModel {
 
     @MainActor func citiesButtonTap() {
         coordinator?.moveToCitiesScreen()
+    }
+
+    func refreshButtonTap() {
+        getCityWeather()
     }
 
     func viewDidLoad() {
@@ -88,14 +88,17 @@ final class WeatherScreenViewModel: IWeatherScreenViewModel {
 
             switch await service.getWeather(lon: city.lon,lat: city.lat) {
             case .success(let weather):
-//                userDefaults.citiesWeather?.removeAll(where: {$0.cityUID == city.uid})
-//                userDefaults.citiesWeather?.append(weather)
-//                print(userDefaults.citiesWeather)
                 userDefaults.citiesWeather?.updateValue(weather, forKey: city.uid)
                 cityWeather.accept(weather)
             case .failure(let error):
-                debugPrint(error)
-            }
+                let alertAction = AlertActionModel(title: "Close", style: .cancel)
+                let errorAlert = AlertModel(
+                    title: "Error",
+                    message: error.message,
+                    prefferedStyle: .alert,
+                    actionModels: [alertAction]
+                )
+                alert.accept(errorAlert)            }
         }
     }
 

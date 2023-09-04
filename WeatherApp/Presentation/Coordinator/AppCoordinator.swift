@@ -18,7 +18,6 @@ import UIKit
 
     // MARK: - Coordinator
     func start() {
-
         let service = WeatherScreenService(networkClient: NetworkClient())
         let viewModel = WeatherScreenViewModel(service: service)
         viewModel.coordinator = self
@@ -33,15 +32,12 @@ import UIKit
 
 extension AppCoodinator {
     func moveToCitiesScreen() {
-        let vc = CitiesScreenViewController()
-
         let service = CitiesScreenService(
             networkClient: NetworkClient(),
             geoDecoder: GeoDecoder()
         )
         let viewModel = CitiesScreenViewModel(service: service)
-
-        vc.viewModel = viewModel
+        let vc = CitiesScreenViewController(viewModel: viewModel)
 
         navigationController.pushViewController(vc, animated: true)
     }

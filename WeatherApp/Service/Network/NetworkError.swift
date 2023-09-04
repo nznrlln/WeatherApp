@@ -11,4 +11,23 @@ enum NetworkError: Error {
     case parsingFailure
     case networkError
     case timeout
+
+
 }
+
+extension NetworkError {
+    var message: String {
+        switch self {
+        case .cantBuildUrlFromRequest:
+            return "Ошибка запроса"
+        case .parsingFailure:
+            return "Ошибка парсинга"
+//        case .noInternetConnection, .timeout:
+//            return "Нет связи"
+        default:
+//            return "Неизвестная ошибка"
+            return "Нет связи"
+        }
+    }
+}
+
