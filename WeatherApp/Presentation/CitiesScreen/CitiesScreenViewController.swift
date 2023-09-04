@@ -9,11 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-@MainActor protocol CitiesScreenViewInput: AnyObject {
-
-}
-
-class CitiesScreenViewController: UIViewController, CitiesScreenViewInput {
+class CitiesScreenViewController: UIViewController {
 
     // MARK: - Properties
     private let viewModel: ICitiesScreenViewModel
@@ -81,9 +77,6 @@ class CitiesScreenViewController: UIViewController, CitiesScreenViewInput {
             CityCollectionViewCell.self,
             forCellWithReuseIdentifier: CityCollectionViewCell.identifier
         )
-//
-//        collectionView.dataSource = self
-//        collectionView.delegate = self
 
         collectionView.backgroundColor = Palette.clearBackground
 
@@ -180,8 +173,9 @@ class CitiesScreenViewController: UIViewController, CitiesScreenViewInput {
         let alert = AlertBuilder.buildAddCityAlert { [weak self] name in
             self?.viewModel.addCityButtonTap(name: name)
         }
-
-        self.present(alert, animated: true)
+        DispatchQueue.main.async {
+            self.present(alert, animated: true)
+        }
 
     }
 

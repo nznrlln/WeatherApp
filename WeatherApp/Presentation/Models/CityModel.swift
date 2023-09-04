@@ -7,13 +7,6 @@
 
 import Foundation
 
-//struct CityModel: Codable, Hashable {
-//    let city: String
-//    let country: String
-//    let lon: String
-//    let lat: String
-//}
-
 struct CityModel: Codable, Hashable {
     let city: String
     let country: String
@@ -21,4 +14,12 @@ struct CityModel: Codable, Hashable {
     let lat: String
 
     var uid: String
+
+    enum CodingKeys: String, CodingKey {
+        case city
+        case country
+        case lon
+        case lat
+        case uid
+    }
 }

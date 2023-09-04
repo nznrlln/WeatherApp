@@ -45,24 +45,14 @@ final class UserDefaultsService {
     }
 
     /// Latest weather data for each city
-    var citiesWeather: [String : CityWeatherModel]? {
+    var citiesWeather: [String : CityWeatherModel] {
         get {
-             return userDefaults.value([String : CityWeatherModel].self, forKey: UserDefaultsKeys.citiesWeather.rawValue)
+            return userDefaults.value([String : CityWeatherModel].self, forKey: UserDefaultsKeys.citiesWeather.rawValue) ?? [:]
         }
         set {
             userDefaults.set(encodable: newValue, forKey: UserDefaultsKeys.citiesWeather.rawValue)
         }
     }
-
-    /// Latest weather data for each city
-//    var citiesWeather: [CityWeatherModel]? {
-//        get {
-//             return userDefaults.value([CityWeatherModel].self, forKey: UserDefaultsKeys.citiesWeather.rawValue)
-//        }
-//        set {
-//            userDefaults.set(encodable: newValue, forKey: UserDefaultsKeys.citiesWeather.rawValue)
-//        }
-//    }
 
     private init() {}
 

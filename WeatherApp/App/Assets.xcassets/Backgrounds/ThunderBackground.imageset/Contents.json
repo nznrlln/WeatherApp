@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "Thunder-Bolt-Sky-Night-Dark-iphone.jpg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "Thunder-Bolt-Sky-Night-Dark-iphone 1.jpg",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "Thunder-Bolt-Sky-Night-Dark-iphone 2.jpg",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

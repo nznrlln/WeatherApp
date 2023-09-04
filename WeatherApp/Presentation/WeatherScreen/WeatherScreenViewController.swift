@@ -8,11 +8,7 @@
 import UIKit
 import RxSwift
 
-@MainActor protocol WeatherScreenViewInput: AnyObject {
-
-}
-
-final class WeatherScreenViewController: UIViewController, WeatherScreenViewInput {
+final class WeatherScreenViewController: UIViewController {
 
     // MARK: - Properties
 
@@ -212,7 +208,9 @@ final class WeatherScreenViewController: UIViewController, WeatherScreenViewInpu
     }
 
     private func displayWeather() {
+        let background = BackgroundHelper.getBackgroundName(code: weather?.currentWeather?.weather.code ?? 900)
         DispatchQueue.main.async {
+            self.backgroundImage.image = UIImage(named: background)
             self.weatherCollectionView.reloadData()
         }
     }
@@ -288,7 +286,11 @@ final class WeatherScreenViewController: UIViewController, WeatherScreenViewInpu
 extension WeatherScreenViewController: UICollectionViewDataSource {
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        3
+        if let weather {
+            return 3
+        } else {
+            return 0
+        }
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -332,15 +334,6 @@ extension WeatherScreenViewController: UICollectionViewDataSource {
     }
 
 }
-
-//// MARK: - UICollectionViewDelegate
-//extension WeatherScreenViewController: UICollectionViewDelegate {
-//
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        collectionView.deselectItem(at: indexPath, animated: true)
-//    }
-//
-//}
 
 // MARK: - UIConstansts
 fileprivate enum UIConstansts {

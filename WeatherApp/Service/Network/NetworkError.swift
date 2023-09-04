@@ -22,11 +22,10 @@ extension NetworkError {
             return "Ошибка запроса"
         case .parsingFailure:
             return "Ошибка парсинга"
-//        case .noInternetConnection, .timeout:
-//            return "Нет связи"
-        default:
-//            return "Неизвестная ошибка"
+        case .noInternetConnection, .timeout:
             return "Нет связи"
+        default:
+            return "Неизвестная ошибка"
         }
     }
 }

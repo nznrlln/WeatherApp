@@ -8,7 +8,7 @@
 import UIKit
 
 enum Palette {
-    static let transparentAlpha: CGFloat = 0.8
+    static let transparentAlpha: CGFloat = 0.9
 
     static let mainBackground = UIColor.systemBackground
     static let secondaryBackground = UIColor.white.withAlphaComponent(0.6)

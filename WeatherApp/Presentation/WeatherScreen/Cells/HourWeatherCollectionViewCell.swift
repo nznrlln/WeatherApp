@@ -80,15 +80,6 @@ final class HourWeatherCollectionViewCell: UICollectionViewCell, IHourWeatherCel
         )
         weatherImageView.kf.setImage(with: URL(string: "https://cdn.weatherbit.io/static/img/icons/\(model.weather.iconCode).png"))
         temperatureLabel.text = "\(model.temperature)℃"
-
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-//        let date = dateFormatter.date(from: forecast.forecastTime ?? "2023-01-17T04:00:00")
-//
-//        dateFormatter.dateFormat = FormatHelper.defaultHelper.getLocalizedHours()
-//        hourLabel.text = dateFormatter.string(from: date ?? Date.distantPast)
-//        weatherImageView.image = CoreDataHelper.defaultHelper.getWeatherImage(from: Int(forecast.weatherCode))
-//        temperatureLabel.text = "\(FormatHelper.defaultHelper.getLocalizedTemperature(from: forecast.temperature))"
     }
 
     private func cellInitialSetting() {

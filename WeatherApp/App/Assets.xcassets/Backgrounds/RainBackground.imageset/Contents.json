@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "Rainy-Window-Nature-Water-Drop-Road-White-iphone.jpg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "Rainy-Window-Nature-Water-Drop-Road-White-iphone 1.jpg",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "Rainy-Window-Nature-Water-Drop-Road-White-iphone 2.jpg",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

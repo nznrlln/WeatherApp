@@ -11,11 +11,10 @@ struct CityWeatherModel: Codable {
     var currentWeather: CurrentWeatherModel? = nil
     var forecast24h: [WeatherForecast3hModel]? = nil
     var forecast16d: [WeatherForecast1dModel]? = nil
-}
 
-//struct CityWeatherModel: Codable {
-//    var cityUID: String
-//    var currentWeather: CurrentWeatherModel? = nil
-//    var forecast24h: [WeatherForecast3hModel]? = nil
-//    var forecast16d: [WeatherForecast1dModel]? = nil
-//}
+    enum CodingKeys: String, CodingKey {
+        case currentWeather
+        case forecast24h
+        case forecast16d
+    }
+}

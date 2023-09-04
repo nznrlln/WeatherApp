@@ -9,10 +9,12 @@ import Foundation
 
 struct WeatherModel: Codable {
     let description: String
+    let code: Int
     let iconCode: String
 
     enum CodingKeys: String, CodingKey {
         case description = "description"
+        case code = "code"
         case iconCode = "icon"
     }
 }

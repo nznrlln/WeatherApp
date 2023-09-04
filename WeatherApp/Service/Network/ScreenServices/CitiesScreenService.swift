@@ -8,7 +8,6 @@
 import Foundation
 
 protocol ICitiesScreenService {
-//    func getAds() async -> Result<AdsModel, NetworkError>
     func getCity(_ name: String) async -> Result<CityModel, NetworkError>
 }
 

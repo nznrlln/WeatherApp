@@ -60,6 +60,7 @@
 		FDDD263D2AA36D1000092D6A /* CityCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDDD263C2AA36D1000092D6A /* CityCollectionViewCell.swift */; };
 		FDDD26462AA3A47500092D6A /* AlertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDDD26452AA3A47500092D6A /* AlertModel.swift */; };
 		FDDD26482AA3A4B000092D6A /* AlertBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDDD26472AA3A4B000092D6A /* AlertBuilder.swift */; };
+		FDDD26592AA5F0B600092D6A /* BackgroundHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDDD26582AA5F0B600092D6A /* BackgroundHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -120,6 +121,7 @@
 		FDDD263C2AA36D1000092D6A /* CityCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityCollectionViewCell.swift; sourceTree = "<group>"; };
 		FDDD26452AA3A47500092D6A /* AlertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertModel.swift; sourceTree = "<group>"; };
 		FDDD26472AA3A4B000092D6A /* AlertBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertBuilder.swift; sourceTree = "<group>"; };
+		FDDD26582AA5F0B600092D6A /* BackgroundHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -302,6 +304,7 @@
 				FDDD26572AA5C59000092D6A /* Alerts */,
 				FD8D52722AA09A2800C3D6E0 /* NumberConverter.swift */,
 				FD8D52732AA09A2800C3D6E0 /* DateConverter.swift */,
+				FDDD26582AA5F0B600092D6A /* BackgroundHelper.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -531,6 +534,7 @@
 				FDDD26482AA3A4B000092D6A /* AlertBuilder.swift in Sources */,
 				FD8D52452AA086BF00C3D6E0 /* Coordinator.swift in Sources */,
 				FDDD26382AA2731D00092D6A /* Forecast5d3hRequest.swift in Sources */,
+				FDDD26592AA5F0B600092D6A /* BackgroundHelper.swift in Sources */,
 				FD8D52522AA08C3500C3D6E0 /* CityWeatherModel.swift in Sources */,
 				FD8D52C02AA126F600C3D6E0 /* NetworkRequest.swift in Sources */,
 				FD8D52542AA08C4300C3D6E0 /* CurrentWeatherModel.swift in Sources */,

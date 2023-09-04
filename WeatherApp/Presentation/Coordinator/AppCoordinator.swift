@@ -37,8 +37,14 @@ extension AppCoodinator {
             geoDecoder: GeoDecoder()
         )
         let viewModel = CitiesScreenViewModel(service: service)
+        viewModel.coordinator = self
+
         let vc = CitiesScreenViewController(viewModel: viewModel)
 
         navigationController.pushViewController(vc, animated: true)
+    }
+
+    func backToWeather() {
+        navigationController.popToRootViewController(animated: true)
     }
 }

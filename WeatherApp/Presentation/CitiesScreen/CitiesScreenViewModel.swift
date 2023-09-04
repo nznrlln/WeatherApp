@@ -46,9 +46,12 @@ final class CitiesScreenViewModel: ICitiesScreenViewModel {
         addCity(name)
     }
 
-    func didSelectItem(index: Int) {
+    @MainActor func didSelectItem(index: Int) {
         let city = citiesList.value[index]
         userDefaults.currentCity = city
+
+        print(coordinator)
+        coordinator?.backToWeather()
     }
 
 

@@ -62,7 +62,7 @@ final class WeatherScreenViewModel: IWeatherScreenViewModel {
     private func setupView() {
         getCurrentCity()
         if !checkCachedWeather() {
-//            getCityWeather()
+            getCityWeather()
         }
     }
 
@@ -75,8 +75,7 @@ final class WeatherScreenViewModel: IWeatherScreenViewModel {
 
     private func checkCachedWeather() -> Bool {
         guard let city = currentCity else { return false }
-        print(userDefaults.citiesWeather)
-        guard let weathers = userDefaults.citiesWeather else { return false }
+        let weathers = userDefaults.citiesWeather
         guard let cached = weathers[city.uid] else { return false }
         cityWeather.accept(cached)
 
@@ -88,7 +87,7 @@ final class WeatherScreenViewModel: IWeatherScreenViewModel {
 
             switch await service.getWeather(lon: city.lon,lat: city.lat) {
             case .success(let weather):
-                userDefaults.citiesWeather?.updateValue(weather, forKey: city.uid)
+                saveToUD(weather: weather, for: city.uid)
                 cityWeather.accept(weather)
             case .failure(let error):
                 let alertAction = AlertActionModel(title: "Close", style: .cancel)
@@ -100,6 +99,12 @@ final class WeatherScreenViewModel: IWeatherScreenViewModel {
                 )
                 alert.accept(errorAlert)            }
         }
+    }
+
+    private func saveToUD(weather: CityWeatherModel, for cityUID: String) {
+        var dict = userDefaults.citiesWeather
+        dict.updateValue(weather, forKey: cityUID)
+        userDefaults.citiesWeather = dict
     }
 
 
